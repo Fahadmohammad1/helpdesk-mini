@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -46,5 +47,11 @@ export class TicketsController {
   @Patch(':id/close')
   closeTicket(@Param('id', ParseIntPipe) id: number) {
     return this.ticketsService.closeTicket(id);
+  }
+
+  @UseGuards(StaffGuard)
+  @Delete(':id')
+  deleteTicket(@Param('id', ParseIntPipe) id: number) {
+    return this.ticketsService.deleteTicket(id);
   }
 }

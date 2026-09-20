@@ -97,4 +97,20 @@ export class TicketsService {
 
     return ticket;
   }
+
+  deleteTicket(id: number) {
+    const ticket = this.findOne(id);
+
+    if (ticket.status !== 'closed') {
+      throw new BadRequestException(
+        `Cannot delete an open ticket with ID ${id}`,
+      );
+    }
+
+    if (!ticket) {
+      throw new NotFoundException(`Ticket with ID ${id} not found`);
+    }
+
+    this.tickets.splice(this.tickets.indexOf(ticket), 1);
+  }
 }

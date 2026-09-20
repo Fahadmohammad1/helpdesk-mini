@@ -1,4 +1,4 @@
-# Helpdesk Lite
+# Ticket Management
 
 A minimal **NestJS** learning project that implements a small helpdesk ticketing API. It is intentionally kept simple so that anyone can read and understand how the pieces fit together.
 
@@ -10,6 +10,7 @@ A minimal **NestJS** learning project that implements a small helpdesk ticketing
 - Wrap every response in a uniform `{ success, data }` shape.
 - Log every incoming request.
 - Protect the "close ticket" endpoint behind a simple staff-only guard.
+- Implement a delete ticket endpoint.
 
 ## How to run
 
@@ -31,13 +32,13 @@ The server starts on `http://localhost:3000` (override with `PORT` env var). All
 
 All routes are under `/api/tickets`.
 
-| Method | Path | Auth | Description |
-|--------|------|------|-------------|
-| GET | `/` | none | List tickets. Supports query params `status` (`open`|`closed`) and `priority` (`low`|`medium`|`high`). |
-| GET | `/:id` | none | Get a single ticket by id. |
-| POST | `/` | none | Create a new ticket. |
-| PATCH | `/:id` | none | Update an open ticket. |
-| PATCH | `/:id/close` | `x-staff-key` header | Close a ticket. |
+| Method | Path         | Auth                 | Description                                          |
+| ------ | ------------ | -------------------- | ---------------------------------------------------- |
+| GET    | `/`          | none                 | List tickets. Supports query params `status` (`open` | `closed`) and `priority` (`low` | `medium` | `high`). |
+| GET    | `/:id`       | none                 | Get a single ticket by id.                           |
+| POST   | `/`          | none                 | Create a new ticket.                                 |
+| PATCH  | `/:id`       | none                 | Update an open ticket.                               |
+| PATCH  | `/:id/close` | `x-staff-key` header | Close a ticket.                                      |
 
 ### Example requests
 
@@ -111,14 +112,14 @@ src/
 
 ## Scripts
 
-| Script | What it does |
-|--------|--------------|
-| `npm run start` | Build once and start the app |
-| `npm run start:dev` | Start and watch for file changes |
+| Script               | What it does                      |
+| -------------------- | --------------------------------- |
+| `npm run start`      | Build once and start the app      |
+| `npm run start:dev`  | Start and watch for file changes  |
 | `npm run start:prod` | Run the compiled app from `dist/` |
-| `npm run build` | Compile TypeScript to `dist/` |
-| `npm run lint` | Run oxlint on `src/` and `test/` |
-| `npm run format` | Format source files with Prettier |
+| `npm run build`      | Compile TypeScript to `dist/`     |
+| `npm run lint`       | Run oxlint on `src/` and `test/`  |
+| `npm run format`     | Format source files with Prettier |
 
 ## License
 
